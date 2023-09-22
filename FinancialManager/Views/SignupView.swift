@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignupView: View {
     @Binding var CurrentShowingView: String
+    @AppStorage("uid") var userID: String = ""
     
     @State private var email:String = ""
     @State private var password:String = ""
@@ -92,6 +94,20 @@ struct SignupView: View {
                 Spacer()
                 
                 Button {
+                    
+                    
+                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                        if let error = error{
+                            print(error)
+                            return
+                        }
+                        
+                        if let authResult = authResult{
+                            print(authResult.user.uid)
+                            userID = authResult.user.uid
+                        }
+                    }
+                    
                 }label:{
                     Text("Sign Up")
                         .foregroundColor(.black)
