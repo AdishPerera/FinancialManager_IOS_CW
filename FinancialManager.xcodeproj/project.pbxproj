@@ -14,6 +14,11 @@
 		886FDD9D2ABC63F60095AC51 /* FinancialManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDD9C2ABC63F60095AC51 /* FinancialManagerTests.swift */; };
 		886FDDA72ABC63F60095AC51 /* FinancialManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDA62ABC63F60095AC51 /* FinancialManagerUITests.swift */; };
 		886FDDA92ABC63F60095AC51 /* FinancialManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDA82ABC63F60095AC51 /* FinancialManagerUITestsLaunchTests.swift */; };
+		886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDB62ABC869E0095AC51 /* LoginView.swift */; };
+		886FDDBA2ABC8D940095AC51 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDB92ABC8D940095AC51 /* String.swift */; };
+		886FDDBC2ABC91F10095AC51 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDBB2ABC91F10095AC51 /* SignupView.swift */; };
+		886FDDBE2ABC93C00095AC51 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDBD2ABC93C00095AC51 /* AuthView.swift */; };
+		886FDDC02ABDC07F0095AC51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		886FDDA22ABC63F60095AC51 /* FinancialManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinancialManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		886FDDA62ABC63F60095AC51 /* FinancialManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialManagerUITests.swift; sourceTree = "<group>"; };
 		886FDDA82ABC63F60095AC51 /* FinancialManagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialManagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		886FDDB62ABC869E0095AC51 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		886FDDB92ABC8D940095AC51 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		886FDDBB2ABC91F10095AC51 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		886FDDBD2ABC93C00095AC51 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +104,11 @@
 		886FDD8A2ABC63F40095AC51 /* FinancialManager */ = {
 			isa = PBXGroup;
 			children = (
+				886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */,
+				886FDDB82ABC8D620095AC51 /* Extensions */,
 				886FDD8B2ABC63F40095AC51 /* FinancialManagerApp.swift */,
 				886FDD8D2ABC63F40095AC51 /* ContentView.swift */,
+				886FDDB52ABC86710095AC51 /* Views */,
 				886FDD8F2ABC63F60095AC51 /* Assets.xcassets */,
 				886FDD912ABC63F60095AC51 /* Preview Content */,
 			);
@@ -125,6 +138,24 @@
 				886FDDA82ABC63F60095AC51 /* FinancialManagerUITestsLaunchTests.swift */,
 			);
 			path = FinancialManagerUITests;
+			sourceTree = "<group>";
+		};
+		886FDDB52ABC86710095AC51 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				886FDDB62ABC869E0095AC51 /* LoginView.swift */,
+				886FDDBB2ABC91F10095AC51 /* SignupView.swift */,
+				886FDDBD2ABC93C00095AC51 /* AuthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		886FDDB82ABC8D620095AC51 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				886FDDB92ABC8D940095AC51 /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +246,9 @@
 				Base,
 			);
 			mainGroup = 886FDD7F2ABC63F40095AC51;
+			packageReferences = (
+				886FDDC22ABDCDC20095AC51 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 886FDD892ABC63F40095AC51 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +267,7 @@
 			files = (
 				886FDD932ABC63F60095AC51 /* Preview Assets.xcassets in Resources */,
 				886FDD902ABC63F60095AC51 /* Assets.xcassets in Resources */,
+				886FDDC02ABDC07F0095AC51 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */,
 				886FDD8E2ABC63F40095AC51 /* ContentView.swift in Sources */,
+				886FDDBE2ABC93C00095AC51 /* AuthView.swift in Sources */,
+				886FDDBA2ABC8D940095AC51 /* String.swift in Sources */,
 				886FDD8C2ABC63F40095AC51 /* FinancialManagerApp.swift in Sources */,
+				886FDDBC2ABC91F10095AC51 /* SignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +616,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		886FDDC22ABDCDC20095AC51 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 886FDD802ABC63F40095AC51 /* Project object */;
 }
