@@ -21,6 +21,11 @@
 		886FDDC02ABDC07F0095AC51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */; };
 		886FDDC52ABDD4460095AC51 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDC42ABDD4460095AC51 /* FirebaseAuth */; };
 		886FDDC72ABDD4460095AC51 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDC62ABDD4460095AC51 /* FirebaseFirestore */; };
+		886FDDD22ABEE3C70095AC51 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDD12ABEE3C70095AC51 /* SwiftUIFontIcon */; };
+		886FDDDA2ABEF4620095AC51 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDD92ABEF4620095AC51 /* Home.swift */; };
+		886FDDDC2ABEF4AE0095AC51 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDDB2ABEF4AE0095AC51 /* Expense.swift */; };
+		886FDDDE2ABEF5780095AC51 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDDD2ABEF5780095AC51 /* ExpenseViewModel.swift */; };
+		886FDDE02ABF19720095AC51 /* TransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDDF2ABF19720095AC51 /* TransactionCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +61,10 @@
 		886FDDBB2ABC91F10095AC51 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		886FDDBD2ABC93C00095AC51 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		886FDDD92ABEF4620095AC51 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		886FDDDB2ABEF4AE0095AC51 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		886FDDDD2ABEF5780095AC51 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
+		886FDDDF2ABF19720095AC51 /* TransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886FDDD22ABEE3C70095AC51 /* SwiftUIFontIcon in Frameworks */,
 				886FDDC52ABDD4460095AC51 /* FirebaseAuth in Frameworks */,
 				886FDDC72ABDD4460095AC51 /* FirebaseFirestore in Frameworks */,
 			);
@@ -108,6 +118,8 @@
 		886FDD8A2ABC63F40095AC51 /* FinancialManager */ = {
 			isa = PBXGroup;
 			children = (
+				886FDDD82ABEF4430095AC51 /* ViewModels */,
+				886FDDD72ABEF4340095AC51 /* Models */,
 				886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */,
 				886FDDB82ABC8D620095AC51 /* Extensions */,
 				886FDD8B2ABC63F40095AC51 /* FinancialManagerApp.swift */,
@@ -150,6 +162,8 @@
 				886FDDB62ABC869E0095AC51 /* LoginView.swift */,
 				886FDDBB2ABC91F10095AC51 /* SignupView.swift */,
 				886FDDBD2ABC93C00095AC51 /* AuthView.swift */,
+				886FDDD92ABEF4620095AC51 /* Home.swift */,
+				886FDDDF2ABF19720095AC51 /* TransactionCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +174,22 @@
 				886FDDB92ABC8D940095AC51 /* String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		886FDDD72ABEF4340095AC51 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				886FDDDB2ABEF4AE0095AC51 /* Expense.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		886FDDD82ABEF4430095AC51 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				886FDDDD2ABEF5780095AC51 /* ExpenseViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +211,7 @@
 			packageProductDependencies = (
 				886FDDC42ABDD4460095AC51 /* FirebaseAuth */,
 				886FDDC62ABDD4460095AC51 /* FirebaseFirestore */,
+				886FDDD12ABEE3C70095AC51 /* SwiftUIFontIcon */,
 			);
 			productName = FinancialManager;
 			productReference = 886FDD882ABC63F40095AC51 /* FinancialManager.app */;
@@ -256,6 +287,7 @@
 			mainGroup = 886FDD7F2ABC63F40095AC51;
 			packageReferences = (
 				886FDDC32ABDD4460095AC51 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				886FDDD02ABEE3C70095AC51 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
 			);
 			productRefGroup = 886FDD892ABC63F40095AC51 /* Products */;
 			projectDirPath = "";
@@ -300,11 +332,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886FDDDC2ABEF4AE0095AC51 /* Expense.swift in Sources */,
 				886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */,
 				886FDD8E2ABC63F40095AC51 /* ContentView.swift in Sources */,
+				886FDDE02ABF19720095AC51 /* TransactionCardView.swift in Sources */,
 				886FDDBE2ABC93C00095AC51 /* AuthView.swift in Sources */,
+				886FDDDA2ABEF4620095AC51 /* Home.swift in Sources */,
 				886FDDBA2ABC8D940095AC51 /* String.swift in Sources */,
 				886FDD8C2ABC63F40095AC51 /* FinancialManagerApp.swift in Sources */,
+				886FDDDE2ABEF5780095AC51 /* ExpenseViewModel.swift in Sources */,
 				886FDDBC2ABC91F10095AC51 /* SignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,6 +670,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		886FDDD02ABEE3C70095AC51 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -646,6 +690,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 886FDDC32ABDD4460095AC51 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		886FDDD12ABEE3C70095AC51 /* SwiftUIFontIcon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 886FDDD02ABEE3C70095AC51 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
+			productName = SwiftUIFontIcon;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
