@@ -18,7 +18,10 @@ struct ContentView: View {
             AuthView()
         }
         else{
-            Home()
+            NavigationView{
+                Home()
+                    .navigationBarHidden(true)
+            }
         }
     }
 }
