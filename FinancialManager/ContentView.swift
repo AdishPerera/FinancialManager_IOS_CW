@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
+    @State private var currentTab: String = "Expenses"
     
     @AppStorage("uid") var userID: String = ""
     
@@ -18,9 +19,28 @@ struct ContentView: View {
             AuthView()
         }
         else{
-            NavigationView{
+            TabView(selection: $currentTab){
                 Home()
                     .navigationBarHidden(true)
+                    .tag("Expenses")
+                    .tabItem{
+                        Image(systemName: "creditcard.fill")
+                        Text("Expenses")
+                    }
+                
+                CategoriesView()
+                    .tag("Categories")
+                    .tabItem{
+                        Image(systemName:"list.clipboard.fill")
+                        Text("Categories")
+                    }
+                
+                ReportsView()
+                    .tag("Reports")
+                    .tabItem {
+                        Image(systemName: "chart.bar.fill")
+                        Text("Reports")
+                    }
             }
         }
     }

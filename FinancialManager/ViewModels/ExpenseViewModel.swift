@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class ExpenseViewModel: ObservableObject {
     //Properties
@@ -26,6 +29,9 @@ class ExpenseViewModel: ObservableObject {
     @Published var type: ExpenseType = .all
     @Published var date: Date = Date()
     @Published var remark: String = ""
+    
+    var alertMessage:String = ""
+    var showAlert = false
     
     init(){
         let calendar = Calendar.current
@@ -74,17 +80,75 @@ class ExpenseViewModel: ObservableObject {
     }
     
     //Save Data
-    func saveData(env: EnvironmentValues){
-        print("Save")
+    func saveData(env: EnvironmentValues) {
+        guard let currentUser = Auth.auth().currentUser else {
+                self.alertMessage = "User not authenticated"
+                self.showAlert = true
+                return
+            }
+        
+        let uid = currentUser.uid
+        let db = Firestore.firestore()
         let amountInDouble = (amount as NSString).doubleValue
-        let colors = ["Gradient1","Gradient2","Gradient3"]
-        let expense = Expense(remark: remark, amount: amountInDouble, date: date, type: type, color: colors.randomElement() ?? "Gradient2")
-        withAnimation{expenses.append(expense)}
-        expenses = expenses.sorted(by: {first,scnd in
-            return scnd.date < first.date
-        })
-        env.dismiss()
+        let colors = ["Yellow", "Red", "Purple", "Green"]
+        let expenseData: [String: Any] = [
+            "userId": uid,
+            "remark": remark,
+            "amount": amountInDouble,
+            "date": Timestamp(date: date),
+            "type": type.rawValue,
+            "color": colors.randomElement() ?? "Gradient2"
+        ]
+        
+        db.collection("Expenses").addDocument(data: expenseData) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added successfully!")
+                env.dismiss()
+            }
+        }
+    }
+    
+    //Fetch data
+    func fetchData() {
+        let db = Firestore.firestore()
+        
+        db.collection("Expenses").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching data: \(error)")
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                print("No documents found.")
+                return
+            }
+            
+            let fetchedExpenses = documents.compactMap { document -> Expense? in
+                let data = document.data()
+ 
+                guard
+                    let remark = data["remark"] as? String,
+                    let amount = data["amount"] as? Double,
+                    let dateTimestamp = data["date"] as? Timestamp,
+                    let typeRawValue = data["type"] as? String,
+                    let color = data["color"] as? String
+                else {
+                    return nil
+                }
+                
+                let date = dateTimestamp.dateValue()
+                let type = ExpenseType(rawValue: typeRawValue) ?? .all
+                
+                return Expense(remark: remark, amount: amount, date: date, type: type, color: color)
+            }
+            
+            withAnimation {
+                self.expenses = fetchedExpenses.sorted(by: { first, second in
+                    return second.date < first.date
+                })
+            }
+        }
     }
 }
-
-

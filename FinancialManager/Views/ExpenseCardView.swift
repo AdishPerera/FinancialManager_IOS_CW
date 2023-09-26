@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpenseCardView: View {
     @EnvironmentObject var expenseViewModel: ExpenseViewModel
-    var isFilter:Bool = false
+    var isFilter: Bool = false
     var body: some View {
         GeometryReader{proxy in
             RoundedRectangle(cornerRadius: 20,style: .continuous)

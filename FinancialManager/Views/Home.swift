@@ -11,72 +11,73 @@ import FirebaseAuth
 struct Home: View {
     @StateObject var expenseViewModel: ExpenseViewModel = .init()
     var body: some View {
-        @AppStorage("uid") var userID: String = ""
-        
-        ScrollView(.vertical, showsIndicators: false){
-            VStack(spacing:12){
-                HStack(spacing:15){
-                    VStack(alignment:.leading, spacing: 4){
-                        Text("Welcome!")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.gray)
-                        
-                        Text("Adish")
-                            .font(.title2.bold())
-                    }
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                    
-                    NavigationLink {
-                        FilteredDetailView()
-                            .environmentObject(expenseViewModel)
-                    } label: {
-                        Image(systemName: "hexagon.fill")
-                            .foregroundColor(.gray)
-                            .overlay(content: {
-                                Circle()
-                                    .stroke(.white,lineWidth:2)
-                                    .padding(7)
-                            })
-                            .frame(width: 40, height: 40)
-                            .background(Color.white,in:
-                                            RoundedRectangle(cornerRadius: 10,style: .continuous))
-                            .shadow(color: .black.opacity(0.1),radius: 5,x:5,y:5)
-                    }
-                    
-                    Button (action: {
-                        let firebaseAuth = Auth.auth()
-                        do {
-                          try firebaseAuth.signOut()
-                            withAnimation{
-                                userID = ""
-                            }
-                        } catch let signOutError as NSError {
-                          print("Error signing out: %@", signOutError)
+        NavigationStack{
+            @AppStorage("uid") var userID: String = ""
+            
+            ScrollView(.vertical, showsIndicators: false){
+                VStack(spacing:12){
+                    HStack(spacing:15){
+                        VStack(alignment:.leading, spacing: 4){
+                            Text("Welcome!")
+                                .font(.title2.bold())
+                             
                         }
-                    }){
-                        Text("Sign Out")
-                    }
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        
+                        NavigationLink {
+                            FilteredDetailView()
+                                .environmentObject(expenseViewModel)
+                        } label: {
+                            Image(systemName: "hexagon.fill")
+                                .foregroundColor(.gray)
+                                .overlay(content: {
+                                    Circle()
+                                        .stroke(.white,lineWidth:2)
+                                        .padding(7)
+                                })
+                                .frame(width: 40, height: 40)
+                                .background(Color.white,in:
+                                                RoundedRectangle(cornerRadius: 10,style: .continuous))
+                                .shadow(color: .black.opacity(0.1),radius: 5,x:5,y:5)
+                        }
+                        
+                        Button (action: {
+                            let firebaseAuth = Auth.auth()
+                            do {
+                              try firebaseAuth.signOut()
+                                withAnimation{
+                                    userID = ""
+                                }
+                            } catch let signOutError as NSError {
+                              print("Error signing out: %@", signOutError)
+                            }
+                        }){
+                            Text("Sign Out")
+                        }
 
+                    }
+                    ExpenseCardView()
+                        .environmentObject(expenseViewModel)
+                    TransactionsView()
                 }
-                ExpenseCardView()
-                    .environmentObject(expenseViewModel)
-                TransactionsView()
+                .padding()
             }
-            .padding()
+            .background{
+                Color("Background")
+                    .ignoresSafeArea()
+            }
+            .fullScreenCover(isPresented: $expenseViewModel.addNewExpense){
+                expenseViewModel.clearData()
+            }content:{
+                NewExpenseView()
+                    .environmentObject(expenseViewModel)
+            }
+            .overlay(alignment: .bottomTrailing){
+                AddButton()
+            }
         }
-        .background{
-            Color("BG")
-                .ignoresSafeArea()
-        }
-        .fullScreenCover(isPresented: $expenseViewModel.addNewExpense){
-            expenseViewModel.clearData()
-        }content:{
-            NewExpenseView()
-                .environmentObject(expenseViewModel)
-        }
-        .overlay(alignment: .bottomTrailing){
-            AddButton()
+        .onAppear {
+            expenseViewModel.fetchData()
         }
     }
     
@@ -104,7 +105,6 @@ struct Home: View {
                 .shadow(color: .black.opacity(0.1),radius: 5, x: 5, y: 5)
         }
         .padding()
-
     }
     
     //Transaction View

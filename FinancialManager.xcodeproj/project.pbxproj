@@ -29,6 +29,10 @@
 		886FDDE22AC01F5B0095AC51 /* FilteredDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE12AC01F5B0095AC51 /* FilteredDetailView.swift */; };
 		886FDDE42AC025B80095AC51 /* ExpenseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */; };
 		886FDDE62AC05BD10095AC51 /* NewExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */; };
+		886FDDE82AC1B2A70095AC51 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */; };
+		886FDDEB2AC1D5D70095AC51 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEA2AC1D5D70095AC51 /* Realm */; };
+		886FDDED2AC1D5D70095AC51 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEC2AC1D5D70095AC51 /* RealmSwift */; };
+		886FDDEF2AC1D9D50095AC51 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,8 @@
 		886FDDE12AC01F5B0095AC51 /* FilteredDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredDetailView.swift; sourceTree = "<group>"; };
 		886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCardView.swift; sourceTree = "<group>"; };
 		886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
+		886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,8 @@
 			files = (
 				886FDDD22ABEE3C70095AC51 /* SwiftUIFontIcon in Frameworks */,
 				886FDDC52ABDD4460095AC51 /* FirebaseAuth in Frameworks */,
+				886FDDEB2AC1D5D70095AC51 /* Realm in Frameworks */,
+				886FDDED2AC1D5D70095AC51 /* RealmSwift in Frameworks */,
 				886FDDC72ABDD4460095AC51 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,10 +135,10 @@
 				886FDDD82ABEF4430095AC51 /* ViewModels */,
 				886FDDD72ABEF4340095AC51 /* Models */,
 				886FDDBF2ABDC07F0095AC51 /* GoogleService-Info.plist */,
+				886FDDB52ABC86710095AC51 /* Views */,
 				886FDDB82ABC8D620095AC51 /* Extensions */,
 				886FDD8B2ABC63F40095AC51 /* FinancialManagerApp.swift */,
 				886FDD8D2ABC63F40095AC51 /* ContentView.swift */,
-				886FDDB52ABC86710095AC51 /* Views */,
 				886FDD8F2ABC63F60095AC51 /* Assets.xcassets */,
 				886FDD912ABC63F60095AC51 /* Preview Content */,
 			);
@@ -173,6 +181,8 @@
 				886FDDE12AC01F5B0095AC51 /* FilteredDetailView.swift */,
 				886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */,
 				886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */,
+				886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */,
+				886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,6 +231,8 @@
 				886FDDC42ABDD4460095AC51 /* FirebaseAuth */,
 				886FDDC62ABDD4460095AC51 /* FirebaseFirestore */,
 				886FDDD12ABEE3C70095AC51 /* SwiftUIFontIcon */,
+				886FDDEA2AC1D5D70095AC51 /* Realm */,
+				886FDDEC2AC1D5D70095AC51 /* RealmSwift */,
 			);
 			productName = FinancialManager;
 			productReference = 886FDD882ABC63F40095AC51 /* FinancialManager.app */;
@@ -297,6 +309,7 @@
 			packageReferences = (
 				886FDDC32ABDD4460095AC51 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				886FDDD02ABEE3C70095AC51 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+				886FDDE92AC1D5D60095AC51 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 886FDD892ABC63F40095AC51 /* Products */;
 			projectDirPath = "";
@@ -342,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				886FDDDC2ABEF4AE0095AC51 /* Expense.swift in Sources */,
+				886FDDEF2AC1D9D50095AC51 /* ReportsView.swift in Sources */,
 				886FDDE42AC025B80095AC51 /* ExpenseCardView.swift in Sources */,
 				886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */,
 				886FDD8E2ABC63F40095AC51 /* ContentView.swift in Sources */,
@@ -349,6 +363,7 @@
 				886FDDE02ABF19720095AC51 /* TransactionCardView.swift in Sources */,
 				886FDDBE2ABC93C00095AC51 /* AuthView.swift in Sources */,
 				886FDDDA2ABEF4620095AC51 /* Home.swift in Sources */,
+				886FDDE82AC1B2A70095AC51 /* CategoriesView.swift in Sources */,
 				886FDDBA2ABC8D940095AC51 /* String.swift in Sources */,
 				886FDD8C2ABC63F40095AC51 /* FinancialManagerApp.swift in Sources */,
 				886FDDDE2ABEF5780095AC51 /* ExpenseViewModel.swift in Sources */,
@@ -690,6 +705,14 @@
 				kind = branch;
 			};
 		};
+		886FDDE92AC1D5D60095AC51 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.42.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -707,6 +730,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 886FDDD02ABEE3C70095AC51 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
 			productName = SwiftUIFontIcon;
+		};
+		886FDDEA2AC1D5D70095AC51 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 886FDDE92AC1D5D60095AC51 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		886FDDEC2AC1D5D70095AC51 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 886FDDE92AC1D5D60095AC51 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

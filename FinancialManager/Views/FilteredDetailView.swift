@@ -79,7 +79,7 @@ struct FilteredDetailView: View {
         }
         .navigationBarHidden(true)
         .background{
-            Color(.white)
+            Color("Background")
                 .ignoresSafeArea()
         }
         .overlay{
