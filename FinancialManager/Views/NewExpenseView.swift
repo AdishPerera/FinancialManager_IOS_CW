@@ -79,6 +79,30 @@ struct NewExpenseView: View {
                 }
                 .padding(.top,5)
                 
+                HStack {
+                    Image(systemName: "tag")
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                    
+                    Text("Select Category")
+                            .foregroundColor(.black)
+                            .frame(width: 150, alignment: .leading)
+                    
+                    Picker(selection: $expenseViewModel.selectedCategoryIndex, label: Text("Select Category")) {
+//                        Text("Select Category")
+//                            .foregroundColor(.black)
+//                            .tag(nil as Int?) // Default value
+                        ForEach(0..<expenseViewModel.categories.count, id: \.self) { index in
+                            Text(expenseViewModel.categories[index].name)
+                                .foregroundColor(.black) // Set the font color to black
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    
+                    Spacer() // Pushes the icon and picker to the leading edge
+                }
+                .padding(.vertical,20)
+                
                 Label {
                     DatePicker.init("", selection: $expenseViewModel.date,in:Date.distantPast...Date(),displayedComponents: [.date])
                         .datePickerStyle(.compact)
@@ -101,7 +125,7 @@ struct NewExpenseView: View {
             .frame(maxHeight: .infinity,alignment: .center)
             
             //Save Button
-            Button(action:{expenseViewModel.saveData(env:env)}){
+            Button(action:{expenseViewModel.saveExpenseData(env:env, selectedCategoryIndex: expenseViewModel.selectedCategoryIndex)}){
                 Text("Save")
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -142,6 +166,9 @@ struct NewExpenseView: View {
                     .opacity(0.7)
             }
             .padding()
+        }
+        .onAppear {
+            expenseViewModel.fetchCategoriesFromFirebase()
         }
     }
     

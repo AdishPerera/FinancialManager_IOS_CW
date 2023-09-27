@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct ContentView: View {
     @State private var currentTab: String = "Expenses"
+    @StateObject private var expenseViewModel = ExpenseViewModel()
     
     @AppStorage("uid") var userID: String = ""
     
@@ -34,13 +35,7 @@ struct ContentView: View {
                         Image(systemName:"list.clipboard.fill")
                         Text("Categories")
                     }
-                
-                ReportsView()
-                    .tag("Reports")
-                    .tabItem {
-                        Image(systemName: "chart.bar.fill")
-                        Text("Reports")
-                    }
+    
             }
         }
     }

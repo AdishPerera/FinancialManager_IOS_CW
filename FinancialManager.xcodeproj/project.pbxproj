@@ -32,7 +32,7 @@
 		886FDDE82AC1B2A70095AC51 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */; };
 		886FDDEB2AC1D5D70095AC51 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEA2AC1D5D70095AC51 /* Realm */; };
 		886FDDED2AC1D5D70095AC51 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEC2AC1D5D70095AC51 /* RealmSwift */; };
-		886FDDEF2AC1D9D50095AC51 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */; };
+		88A39EE22AC47C450024F5A5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A39EE12AC47C450024F5A5 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 		886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCardView.swift; sourceTree = "<group>"; };
 		886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
 		886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
+		88A39EE12AC47C450024F5A5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +182,6 @@
 				886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */,
 				886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */,
 				886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */,
-				886FDDEE2AC1D9D50095AC51 /* ReportsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				886FDDDB2ABEF4AE0095AC51 /* Expense.swift */,
+				88A39EE12AC47C450024F5A5 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,12 +355,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				886FDDDC2ABEF4AE0095AC51 /* Expense.swift in Sources */,
-				886FDDEF2AC1D9D50095AC51 /* ReportsView.swift in Sources */,
 				886FDDE42AC025B80095AC51 /* ExpenseCardView.swift in Sources */,
 				886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */,
 				886FDD8E2ABC63F40095AC51 /* ContentView.swift in Sources */,
 				886FDDE22AC01F5B0095AC51 /* FilteredDetailView.swift in Sources */,
 				886FDDE02ABF19720095AC51 /* TransactionCardView.swift in Sources */,
+				88A39EE22AC47C450024F5A5 /* Category.swift in Sources */,
 				886FDDBE2ABC93C00095AC51 /* AuthView.swift in Sources */,
 				886FDDDA2ABEF4620095AC51 /* Home.swift in Sources */,
 				886FDDE82AC1B2A70095AC51 /* CategoriesView.swift in Sources */,

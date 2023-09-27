@@ -29,6 +29,8 @@ class ExpenseViewModel: ObservableObject {
     @Published var type: ExpenseType = .all
     @Published var date: Date = Date()
     @Published var remark: String = ""
+    @Published var categories: [Category] = []
+    @Published var selectedCategoryIndex: Int?
     
     var alertMessage:String = ""
     var showAlert = false
@@ -80,7 +82,7 @@ class ExpenseViewModel: ObservableObject {
     }
     
     //Save Data
-    func saveData(env: EnvironmentValues) {
+    func saveExpenseData(env: EnvironmentValues, selectedCategoryIndex: Int?) {
         guard let currentUser = Auth.auth().currentUser else {
                 self.alertMessage = "User not authenticated"
                 self.showAlert = true
@@ -91,12 +93,17 @@ class ExpenseViewModel: ObservableObject {
         let db = Firestore.firestore()
         let amountInDouble = (amount as NSString).doubleValue
         let colors = ["Yellow", "Red", "Purple", "Green"]
+        if let selectedCategoryIndex = selectedCategoryIndex {
+            _ = categories[selectedCategoryIndex]
+                // You can use selectedCategory in your data if needed
+            } 
         let expenseData: [String: Any] = [
             "userId": uid,
             "remark": remark,
             "amount": amountInDouble,
             "date": Timestamp(date: date),
             "type": type.rawValue,
+            "category": selectedCategoryIndex as Any,
             "color": colors.randomElement() ?? "Gradient2"
         ]
         
@@ -110,44 +117,113 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    //Fetch data
-    func fetchData() {
+    //Fetch Expense data
+    func fetchExpenseData() {
         let db = Firestore.firestore()
         
-        db.collection("Expenses").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error fetching data: \(error)")
-                return
-            }
-            
-            guard let documents = querySnapshot?.documents else {
-                print("No documents found.")
-                return
-            }
-            
-            let fetchedExpenses = documents.compactMap { document -> Expense? in
-                let data = document.data()
- 
-                guard
-                    let remark = data["remark"] as? String,
-                    let amount = data["amount"] as? Double,
-                    let dateTimestamp = data["date"] as? Timestamp,
-                    let typeRawValue = data["type"] as? String,
-                    let color = data["color"] as? String
-                else {
-                    return nil
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User not authenticated")
+            return
+        }
+        
+        let uid = currentUser.uid
+        
+        db.collection("Expenses")
+            .whereField("userId", isEqualTo: uid) // Filter by userId
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error fetching data: \(error)")
+                    return
                 }
                 
-                let date = dateTimestamp.dateValue()
-                let type = ExpenseType(rawValue: typeRawValue) ?? .all
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents found.")
+                    return
+                }
                 
-                return Expense(remark: remark, amount: amount, date: date, type: type, color: color)
+                let fetchedExpenses = documents.compactMap { document -> Expense? in
+                    let data = document.data()
+                    
+                    guard
+                        let remark = data["remark"] as? String,
+                        let amount = data["amount"] as? Double,
+                        let dateTimestamp = data["date"] as? Timestamp,
+                        let typeRawValue = data["type"] as? String,
+                        let color = data["color"] as? String
+                    else {
+                        return nil
+                    }
+                    
+                    let date = dateTimestamp.dateValue()
+                    let type = ExpenseType(rawValue: typeRawValue) ?? .all
+                    
+                    return Expense(remark: remark, amount: amount, date: date, type: type, color: color)
+                }
+                
+                withAnimation {
+                    self.expenses = fetchedExpenses.sorted(by: { first, second in
+                        return second.date < first.date
+                    })
+                }
+            }
+    }
+
+    
+    func saveCategoryData(categoryName: String) {
+        guard let currentUser = Auth.auth().currentUser else {
+                self.alertMessage = "User not authenticated"
+                self.showAlert = true
+                return
             }
             
-            withAnimation {
-                self.expenses = fetchedExpenses.sorted(by: { first, second in
-                    return second.date < first.date
-                })
+            let db = Firestore.firestore()
+            let categoriesCollection = db.collection("Categories")
+            
+            let newCategoryRef = categoriesCollection.document()
+            let uid = currentUser.uid
+            let categoryData: [String: Any] = [
+                "userId": uid,
+                "name": categoryName
+            ]
+            
+            newCategoryRef.setData(categoryData) { error in
+                if let error = error {
+                    print("Error adding category: \(error)")
+                } else {
+                    print("Category added successfully!")
+                }
+            }
+        }
+    
+
+    //Fetch Category data
+    func fetchCategoriesFromFirebase() {
+        let db = Firestore.firestore()
+        
+        guard let currentUser = Auth.auth().currentUser else {
+            // Handle the case when the user is not authenticated.
+            print("User not authenticated")
+            return
+        }
+        
+        let uid = currentUser.uid
+        
+        let categoriesCollection = db.collection("Categories").whereField("userId", isEqualTo: uid)
+
+        categoriesCollection.getDocuments { querySnapshot, error in
+            if let error = error {
+                print("Error fetching categories: \(error)")
+                return
+            }
+
+            // Clear existing categories
+            self.categories.removeAll()
+
+            // Parse and add fetched categories to the array
+            for document in querySnapshot!.documents {
+                if let categoryName = document.data()["name"] as? String {
+                    self.categories.append(Category(name: categoryName))
+                }
             }
         }
     }

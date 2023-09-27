@@ -77,7 +77,7 @@ struct Home: View {
             }
         }
         .onAppear {
-            expenseViewModel.fetchData()
+            expenseViewModel.fetchExpenseData()
         }
     }
     

@@ -28,7 +28,7 @@ struct FilteredDetailView: View {
                             .shadow(color: .black.opacity(0.1),radius: 5,x:5,y:5)
                     }
                         
-                        Text("Transactions")
+                        Text("Report")
                             .font(.title2.bold())
                             .opacity(0.7)
                             .frame(maxWidth: .infinity,alignment: .leading)
@@ -55,7 +55,15 @@ struct FilteredDetailView: View {
                     Text(expenseViewModel.convertDateToString())
                         .opacity(0.7)
                     
-                    Text(expenseViewModel.convertExpensesToCurrency(expenses: expenseViewModel.expenses, type: expenseViewModel.tabName))
+                    
+                    let filteredExpenses = expenseViewModel.expenses.filter { expense in
+                        let startDate = expenseViewModel.startDate
+                        let endDate = expenseViewModel.endDate
+                        let expenseDate = expense.date
+                        return expense.type == expenseViewModel.tabName && expenseDate >= startDate && expenseDate <= endDate
+                    }
+                    
+                    Text(expenseViewModel.convertExpensesToCurrency(expenses: filteredExpenses, type: expenseViewModel.tabName))
                         .font(.title.bold())
                         .opacity(0.9)
                         .animation(.none, value: expenseViewModel.tabName)
@@ -68,12 +76,16 @@ struct FilteredDetailView: View {
                 }
                 .padding(.vertical,20)
                 
-                ForEach(expenseViewModel.expenses.filter{
-                    return $0.type == expenseViewModel.tabName
-                }){expense in
+                ForEach(expenseViewModel.expenses.filter { expense in
+                    let startDate = expenseViewModel.startDate
+                    let endDate = expenseViewModel.endDate
+                    let expenseDate = expense.date                    
+                    return expense.type == expenseViewModel.tabName && expenseDate >= startDate && expenseDate <= endDate
+                }) { expense in
                     TransactionCardView(expense: expense)
                         .environmentObject(expenseViewModel)
                 }
+
             }
             .padding()
         }
