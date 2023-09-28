@@ -15,6 +15,8 @@ struct LoginView: View {
     @State private var email:String = ""
     @State private var password:String = ""
     
+    @State private var loginError: String? = nil
+    
     private func isValidPassword(_ password: String) -> Bool{
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         
@@ -90,11 +92,18 @@ struct LoginView: View {
                 Spacer()
                 Spacer()
                 
+                if let loginError = loginError {
+                                Text(loginError)
+                                    .foregroundColor(.red)
+                                    .padding()
+                            }
+                
                 Button {
                     
                     Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                         if let error = error{
                             print(error)
+                            self.loginError = "Invalid email or password"
                             return
                         }
                         

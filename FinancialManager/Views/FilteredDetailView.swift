@@ -13,7 +13,7 @@ struct FilteredDetailView: View {
     @Environment(\.self) var env
     @Namespace var animation
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false){
+        
             VStack(spacing: 15){
                 HStack(spacing:15){
                     //Back Button
@@ -51,44 +51,47 @@ struct FilteredDetailView: View {
                     .padding(.top)
                 
                 //Filtered Date with Time
-                VStack(spacing: 15){
-                    Text(expenseViewModel.convertDateToString())
-                        .opacity(0.7)
-                    
-                    
-                    let filteredExpenses = expenseViewModel.expenses.filter { expense in
+                ScrollView{
+                    VStack(spacing: 15){
+                        Text(expenseViewModel.convertDateToString())
+                            .opacity(0.7)
+                        
+                        
+                        let filteredExpenses = expenseViewModel.expenses.filter { expense in
+                            let startDate = expenseViewModel.startDate
+                            let endDate = expenseViewModel.endDate
+                            let expenseDate = expense.date
+                            return expense.type == expenseViewModel.tabName && expenseDate >= startDate && expenseDate <= endDate
+                        }
+                        
+                        Text(expenseViewModel.convertExpensesToCurrency(expenses: filteredExpenses, type: expenseViewModel.tabName))
+                            .font(.title.bold())
+                            .opacity(0.9)
+                            .animation(.none, value: expenseViewModel.tabName)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background{
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(.white)
+                    }
+                    .padding(.vertical,20)
+                
+                
+                    ForEach(expenseViewModel.expenses.filter { expense in
                         let startDate = expenseViewModel.startDate
                         let endDate = expenseViewModel.endDate
-                        let expenseDate = expense.date
+                        let expenseDate = expense.date                    
                         return expense.type == expenseViewModel.tabName && expenseDate >= startDate && expenseDate <= endDate
+                    }) { expense in
+                        TransactionCardView(expense: expense)
+                            .environmentObject(expenseViewModel)
                     }
-                    
-                    Text(expenseViewModel.convertExpensesToCurrency(expenses: filteredExpenses, type: expenseViewModel.tabName))
-                        .font(.title.bold())
-                        .opacity(0.9)
-                        .animation(.none, value: expenseViewModel.tabName)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background{
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .fill(.white)
-                }
-                .padding(.vertical,20)
-                
-                ForEach(expenseViewModel.expenses.filter { expense in
-                    let startDate = expenseViewModel.startDate
-                    let endDate = expenseViewModel.endDate
-                    let expenseDate = expense.date                    
-                    return expense.type == expenseViewModel.tabName && expenseDate >= startDate && expenseDate <= endDate
-                }) { expense in
-                    TransactionCardView(expense: expense)
-                        .environmentObject(expenseViewModel)
                 }
 
             }
             .padding()
-        }
+        
         .navigationBarHidden(true)
         .background{
             Color("Background")

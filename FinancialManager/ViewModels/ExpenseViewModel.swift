@@ -30,7 +30,9 @@ class ExpenseViewModel: ObservableObject {
     @Published var date: Date = Date()
     @Published var remark: String = ""
     @Published var categories: [Category] = []
-    @Published var selectedCategoryIndex: Int?
+    @Published var selectedCategoryIndex: Int = 0
+    @Published var selectedCategoryName: String?
+
     
     var alertMessage:String = ""
     var showAlert = false
@@ -82,7 +84,7 @@ class ExpenseViewModel: ObservableObject {
     }
     
     //Save Data
-    func saveExpenseData(env: EnvironmentValues, selectedCategoryIndex: Int?) {
+    func saveExpenseData(env: EnvironmentValues, categoryName: String?) {
         guard let currentUser = Auth.auth().currentUser else {
                 self.alertMessage = "User not authenticated"
                 self.showAlert = true
@@ -93,18 +95,18 @@ class ExpenseViewModel: ObservableObject {
         let db = Firestore.firestore()
         let amountInDouble = (amount as NSString).doubleValue
         let colors = ["Yellow", "Red", "Purple", "Green"]
-        if let selectedCategoryIndex = selectedCategoryIndex {
-            _ = categories[selectedCategoryIndex]
-                // You can use selectedCategory in your data if needed
-            } 
+//        if let selectedCategoryIndex = selectedCategoryIndex {
+//            _ = categories[selectedCategoryIndex]
+//                // You can use selectedCategory in your data if needed
+//            } 
         let expenseData: [String: Any] = [
             "userId": uid,
             "remark": remark,
             "amount": amountInDouble,
             "date": Timestamp(date: date),
             "type": type.rawValue,
-            "category": selectedCategoryIndex as Any,
-            "color": colors.randomElement() ?? "Gradient2"
+            "category": categoryName ?? "",
+            "color": colors.randomElement() ?? "Yellow"
         ]
         
         db.collection("Expenses").addDocument(data: expenseData) { error in
@@ -149,7 +151,8 @@ class ExpenseViewModel: ObservableObject {
                         let amount = data["amount"] as? Double,
                         let dateTimestamp = data["date"] as? Timestamp,
                         let typeRawValue = data["type"] as? String,
-                        let color = data["color"] as? String
+                        let color = data["color"] as? String,
+                        let category = data["category"] as? String
                     else {
                         return nil
                     }
@@ -157,7 +160,7 @@ class ExpenseViewModel: ObservableObject {
                     let date = dateTimestamp.dateValue()
                     let type = ExpenseType(rawValue: typeRawValue) ?? .all
                     
-                    return Expense(remark: remark, amount: amount, date: date, type: type, color: color)
+                    return Expense(remark: remark, amount: amount, date: date, type: type, color: color, category: category)
                 }
                 
                 withAnimation {
@@ -197,7 +200,7 @@ class ExpenseViewModel: ObservableObject {
     
 
     //Fetch Category data
-    func fetchCategoriesFromFirebase() {
+    func fetchCategoriesData() {
         let db = Firestore.firestore()
         
         guard let currentUser = Auth.auth().currentUser else {
@@ -227,4 +230,24 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteCategoryFromDatabase(categoryID: String) {
+        guard let currentUser = Auth.auth().currentUser else {
+            self.alertMessage = "User not authenticated"
+            self.showAlert = true
+            return
+        }
+
+        let db = Firestore.firestore()
+        let categoriesCollection = db.collection("Categories")
+
+        categoriesCollection.document(categoryID).delete { error in
+            if let error = error {
+                print("Error deleting category: \(error)")
+            } else {
+                print("Category deleted successfully!")
+            }
+        }
+    }
+
 }

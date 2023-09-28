@@ -85,23 +85,22 @@ struct NewExpenseView: View {
                         .padding(.horizontal)
                     
                     Text("Select Category")
-                            .foregroundColor(.black)
-                            .frame(width: 150, alignment: .leading)
+                        .foregroundColor(.black)
+                        .frame(width: 150, alignment: .leading)
                     
                     Picker(selection: $expenseViewModel.selectedCategoryIndex, label: Text("Select Category")) {
-//                        Text("Select Category")
-//                            .foregroundColor(.black)
-//                            .tag(nil as Int?) // Default value
                         ForEach(0..<expenseViewModel.categories.count, id: \.self) { index in
                             Text(expenseViewModel.categories[index].name)
                                 .foregroundColor(.black) // Set the font color to black
+                                .tag(expenseViewModel.categories[index].name) // Tag the category name
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
                     
                     Spacer() // Pushes the icon and picker to the leading edge
                 }
-                .padding(.vertical,20)
+                .padding(.vertical, 20)
+
                 
                 Label {
                     DatePicker.init("", selection: $expenseViewModel.date,in:Date.distantPast...Date(),displayedComponents: [.date])
@@ -125,7 +124,9 @@ struct NewExpenseView: View {
             .frame(maxHeight: .infinity,alignment: .center)
             
             //Save Button
-            Button(action:{expenseViewModel.saveExpenseData(env:env, selectedCategoryIndex: expenseViewModel.selectedCategoryIndex)}){
+            Button(action:{let selectedCategoryName = expenseViewModel.selectedCategoryIndex >= 0 && expenseViewModel.selectedCategoryIndex < expenseViewModel.categories.count ? expenseViewModel.categories[expenseViewModel.selectedCategoryIndex].name : nil
+                expenseViewModel.saveExpenseData(env: env, categoryName: selectedCategoryName)
+                }){
                 Text("Save")
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -168,7 +169,7 @@ struct NewExpenseView: View {
             .padding()
         }
         .onAppear {
-            expenseViewModel.fetchCategoriesFromFirebase()
+            expenseViewModel.fetchCategoriesData()
         }
     }
     

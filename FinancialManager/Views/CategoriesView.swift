@@ -94,15 +94,24 @@ struct CategoriesView: View {
                     .ignoresSafeArea()
             }
         }
+        .presentationDetents([.medium, .medium])
+        .presentationDragIndicator(.visible)
         .onAppear {
-            expenseViewModel.fetchCategoriesFromFirebase()
+            expenseViewModel.fetchCategoriesData()
         }
     }
 
     // Function to delete a category
     func deleteCategory(at offsets: IndexSet) {
+        for offset in offsets {
+            let category = categories[offset]
+            // Call the function to delete from the database
+            expenseViewModel.deleteCategoryFromDatabase(categoryID: category.id.uuidString)
+        }
+        // Remove the category from the local array
         categories.remove(atOffsets: offsets)
     }
+
     
     @ViewBuilder
     func AddButton()->some View{
@@ -128,6 +137,8 @@ struct CategoriesView: View {
         }
         .padding()
     }
+    
+    
 }
 
 struct CategoriesView_Previews: PreviewProvider {

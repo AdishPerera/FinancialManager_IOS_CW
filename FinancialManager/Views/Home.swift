@@ -14,7 +14,6 @@ struct Home: View {
         NavigationStack{
             @AppStorage("uid") var userID: String = ""
             
-            ScrollView(.vertical, showsIndicators: false){
                 VStack(spacing:12){
                     HStack(spacing:15){
                         VStack(alignment:.leading, spacing: 4){
@@ -61,20 +60,21 @@ struct Home: View {
                     TransactionsView()
                 }
                 .padding()
-            }
-            .background{
-                Color("Background")
-                    .ignoresSafeArea()
-            }
-            .fullScreenCover(isPresented: $expenseViewModel.addNewExpense){
-                expenseViewModel.clearData()
-            }content:{
-                NewExpenseView()
-                    .environmentObject(expenseViewModel)
-            }
-            .overlay(alignment: .bottomTrailing){
-                AddButton()
-            }
+                .background{
+                    Color("Background")
+                        .ignoresSafeArea()
+                }
+                .fullScreenCover(isPresented: $expenseViewModel.addNewExpense){
+                    expenseViewModel.clearData()
+                }content:{
+                    NewExpenseView()
+                        .environmentObject(expenseViewModel)
+                }
+                .overlay(alignment: .bottomTrailing){
+                    AddButton()
+                }
+            
+            
         }
         .onAppear {
             expenseViewModel.fetchExpenseData()
@@ -110,19 +110,21 @@ struct Home: View {
     //Transaction View
     @ViewBuilder
     func TransactionsView()->some View{
-        VStack(spacing: 15){
-            Text("Transactions")
-                .font(.title2.bold())
-                .opacity(0.7)
-                .frame(maxWidth: .infinity,alignment: .leading)
-                .padding(.bottom)
-            
-            ForEach(expenseViewModel.expenses){expense in
-                TransactionCardView(expense: expense)
-                    .environmentObject(expenseViewModel)
+        ScrollView{
+            VStack(spacing: 15){
+                Text("Transactions")
+                    .font(.title2.bold())
+                    .opacity(0.7)
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .padding(.bottom)
+                
+                ForEach(expenseViewModel.expenses){expense in
+                    TransactionCardView(expense: expense)
+                        .environmentObject(expenseViewModel)
+                }
             }
+            .padding(.top)
         }
-        .padding(.top)
     }
     
     

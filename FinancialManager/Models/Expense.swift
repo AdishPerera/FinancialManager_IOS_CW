@@ -14,6 +14,7 @@ struct Expense: Identifiable,Hashable{
     var date: Date
     var type: ExpenseType
     var color: String
+    var category: String
 }
 
 enum ExpenseType: String{
@@ -23,5 +24,5 @@ enum ExpenseType: String{
 }
 
 var sample_expenses: [Expense] = [
-    //Expense(remark: "Food", amount: 15, date: Date(timeIntervalSince1970: 1652987245), type: .expense, color: "Gradient2")
+    //Expense(remark: "Food", amount: 15, date: Date(timeIntervalSince1970: 1652987245), type: .expense, color: "Yellow")
 ]
