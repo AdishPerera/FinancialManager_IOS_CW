@@ -35,6 +35,13 @@ struct ContentView: View {
                         Image(systemName:"list.clipboard.fill")
                         Text("Categories")
                     }
+                
+                SettingsView()
+                    .tag("Settings")
+                    .tabItem{
+                        Image(systemName:"gear")
+                        Text("Settings")
+                    }
     
             }
         }

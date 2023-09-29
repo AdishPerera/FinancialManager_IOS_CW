@@ -45,7 +45,7 @@ class ExpenseViewModel: ObservableObject {
         currentMonthStartDate = calendar.date(from: components)!
     }
     
-    @Published var expenses:[Expense] = sample_expenses
+    @Published var expenses: [Expense] = []
     
     func currentMonthDateString()->String{
         return currentMonthStartDate.formatted(date:.abbreviated,time:.omitted) + " - " +
@@ -83,6 +83,13 @@ class ExpenseViewModel: ObservableObject {
         amount = ""
     }
     
+    func addExpense(_ expense: Expense) {
+        withAnimation {
+            self.expenses.insert(expense, at: 0)
+        }
+        fetchExpenseData()
+    }
+    
     //Save Data
     func saveExpenseData(env: EnvironmentValues, categoryName: String?) {
         guard let currentUser = Auth.auth().currentUser else {
@@ -114,7 +121,16 @@ class ExpenseViewModel: ObservableObject {
                 print("Error adding document: \(error)")
             } else {
                 print("Document added successfully!")
-                env.dismiss()
+                let newExpense = Expense(
+                    remark: self.remark,
+                                amount: amountInDouble,
+                                date: self.date,
+                                type: self.type,
+                                color: colors.randomElement() ?? "Yellow",
+                                category: categoryName ?? ""
+                            )
+                            self.addExpense(newExpense)
+                            env.dismiss()
             }
         }
     }

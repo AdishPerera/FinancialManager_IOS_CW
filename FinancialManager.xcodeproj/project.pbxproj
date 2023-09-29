@@ -32,6 +32,7 @@
 		886FDDE82AC1B2A70095AC51 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */; };
 		886FDDEB2AC1D5D70095AC51 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEA2AC1D5D70095AC51 /* Realm */; };
 		886FDDED2AC1D5D70095AC51 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 886FDDEC2AC1D5D70095AC51 /* RealmSwift */; };
+		88A39EE42AC68A8E0024F5A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A39EE32AC68A8E0024F5A5 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCardView.swift; sourceTree = "<group>"; };
 		886FDDE52AC05BD10095AC51 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
 		886FDDE72AC1B2A70095AC51 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		88A39EE32AC68A8E0024F5A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				886FDDBB2ABC91F10095AC51 /* SignupView.swift */,
 				886FDDBD2ABC93C00095AC51 /* AuthView.swift */,
 				886FDDD92ABEF4620095AC51 /* Home.swift */,
+				88A39EE32AC68A8E0024F5A5 /* SettingsView.swift */,
 				886FDDDF2ABF19720095AC51 /* TransactionCardView.swift */,
 				886FDDE12AC01F5B0095AC51 /* FilteredDetailView.swift */,
 				886FDDE32AC025B80095AC51 /* ExpenseCardView.swift */,
@@ -351,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A39EE42AC68A8E0024F5A5 /* SettingsView.swift in Sources */,
 				886FDDDC2ABEF4AE0095AC51 /* Expense.swift in Sources */,
 				886FDDE42AC025B80095AC51 /* ExpenseCardView.swift in Sources */,
 				886FDDB72ABC869E0095AC51 /* LoginView.swift in Sources */,

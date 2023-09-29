@@ -12,8 +12,8 @@ struct LoginView: View {
     @Binding var CurrentShowingView: String
     @AppStorage("uid") var userID: String = ""
     
-    @State private var email:String = ""
-    @State private var password:String = ""
+    @AppStorage("email") var email: String = ""
+    @State private var password: String = ""
     
     @State private var loginError: String? = nil
     
@@ -109,6 +109,7 @@ struct LoginView: View {
                         
                         if let authResult = authResult{
                             print(authResult.user.uid)
+                            email = authResult.user.email ?? ""
                             withAnimation{
                                 userID = authResult.user.uid
                             }

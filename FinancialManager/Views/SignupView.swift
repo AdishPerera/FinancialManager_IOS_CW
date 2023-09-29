@@ -12,7 +12,7 @@ struct SignupView: View {
     @Binding var CurrentShowingView: String
     @AppStorage("uid") var userID: String = ""
     
-    @State private var email:String = ""
+    @AppStorage("email") var email:String = ""
     @State private var password:String = ""
     
     private func isValidPassword(_ password: String) -> Bool{
@@ -26,7 +26,7 @@ struct SignupView: View {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack{
                 HStack{
-                    Text("Create an Account")
+                    Text("Create Account")
                         .foregroundColor(.white)
                         .font(.largeTitle)
                         .bold()
@@ -104,6 +104,7 @@ struct SignupView: View {
                         
                         if let authResult = authResult{
                             print(authResult.user.uid)
+                            email = authResult.user.email ?? ""
                             userID = authResult.user.uid
                         }
                     }

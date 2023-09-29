@@ -39,20 +39,6 @@ struct Home: View {
                                                 RoundedRectangle(cornerRadius: 10,style: .continuous))
                                 .shadow(color: .black.opacity(0.1),radius: 5,x:5,y:5)
                         }
-                        
-                        Button (action: {
-                            let firebaseAuth = Auth.auth()
-                            do {
-                              try firebaseAuth.signOut()
-                                withAnimation{
-                                    userID = ""
-                                }
-                            } catch let signOutError as NSError {
-                              print("Error signing out: %@", signOutError)
-                            }
-                        }){
-                            Text("Sign Out")
-                        }
 
                     }
                     ExpenseCardView()
