@@ -17,6 +17,9 @@ struct LoginView: View {
     
     @State private var loginError: String? = nil
     
+    //Capitalized letter
+    //Special Symblol
+    //At least 6 letters
     private func isValidPassword(_ password: String) -> Bool{
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         
@@ -27,17 +30,21 @@ struct LoginView: View {
         ZStack{
             Color.white.edgesIgnoringSafeArea(.all)
             VStack{
-                HStack{
-                    Text("Welcome Back!").font(.largeTitle).bold()
-                    
-                    Spacer()
+                VStack{
+                    Text("EXPESY").font(.largeTitle).bold().frame(alignment:.center).padding(.bottom)
                 }
                 .padding()
                 .padding(.top)
                 
                 Spacer()
                 
+                VStack{
+                    Text("Welcome Back!").font(.title).bold().multilineTextAlignment(.center)
+                }
+                .padding(.top)
+                
                 HStack{
+                    
                     Image(systemName: "mail")
                     TextField("Email", text: $email)
                     

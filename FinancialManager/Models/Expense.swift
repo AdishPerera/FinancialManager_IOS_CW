@@ -22,7 +22,3 @@ enum ExpenseType: String{
     case expense = "Expenses"
     case all = "ALL"
 }
-
-var sample_expenses: [Expense] = [
-    //Expense(remark: "Food", amount: 15, date: Date(timeIntervalSince1970: 1652987245), type: .expense, color: "Yellow")
-]

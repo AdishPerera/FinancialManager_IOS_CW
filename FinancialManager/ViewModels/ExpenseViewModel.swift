@@ -90,7 +90,7 @@ class ExpenseViewModel: ObservableObject {
         fetchExpenseData()
     }
     
-    //Save Data
+    //Save Expense Data
     func saveExpenseData(env: EnvironmentValues, categoryName: String?) {
         guard let currentUser = Auth.auth().currentUser else {
                 self.alertMessage = "User not authenticated"
@@ -102,10 +102,6 @@ class ExpenseViewModel: ObservableObject {
         let db = Firestore.firestore()
         let amountInDouble = (amount as NSString).doubleValue
         let colors = ["Yellow", "Red", "Purple", "Green"]
-//        if let selectedCategoryIndex = selectedCategoryIndex {
-//            _ = categories[selectedCategoryIndex]
-//                // You can use selectedCategory in your data if needed
-//            } 
         let expenseData: [String: Any] = [
             "userId": uid,
             "remark": remark,
@@ -147,7 +143,7 @@ class ExpenseViewModel: ObservableObject {
         let uid = currentUser.uid
         
         db.collection("Expenses")
-            .whereField("userId", isEqualTo: uid) // Filter by userId
+            .whereField("userId", isEqualTo: uid)
             .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     print("Error fetching data: \(error)")
@@ -187,7 +183,7 @@ class ExpenseViewModel: ObservableObject {
             }
     }
 
-    
+    //Save Category Data
     func saveCategoryData(categoryName: String) {
         guard let currentUser = Auth.auth().currentUser else {
                 self.alertMessage = "User not authenticated"
@@ -247,6 +243,7 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
+    //Delete Category Data
     func deleteCategoryFromDatabase(categoryID: String) {
         guard let currentUser = Auth.auth().currentUser else {
             self.alertMessage = "User not authenticated"

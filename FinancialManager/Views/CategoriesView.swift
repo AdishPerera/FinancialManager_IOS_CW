@@ -101,14 +101,12 @@ struct CategoriesView: View {
         }
     }
 
-    // Function to delete a category
+    // Function to delete category
     func deleteCategory(at offsets: IndexSet) {
         for offset in offsets {
             let category = categories[offset]
-            // Call the function to delete from the database
             expenseViewModel.deleteCategoryFromDatabase(categoryID: category.id.uuidString)
         }
-        // Remove the category from the local array
         categories.remove(atOffsets: offsets)
     }
 

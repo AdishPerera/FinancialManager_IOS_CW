@@ -97,7 +97,7 @@ struct NewExpenseView: View {
                     }
                     .pickerStyle(MenuPickerStyle())
                     
-                    Spacer() // Pushes the icon and picker to the leading edge
+                    Spacer()
                 }
                 .padding(.vertical, 20)
 

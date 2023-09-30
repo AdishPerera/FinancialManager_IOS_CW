@@ -3,14 +3,14 @@ import FirebaseAuth
 
 struct SettingsView: View {
     @AppStorage("uid") var userID: String = ""
-    @AppStorage("email") var email: String = "" // Add AppStorage for user's email
+    @AppStorage("email") var email: String = ""
     
     var body: some View {
         VStack {
             ZStack {
                 Circle()
                     .frame(width: 80, height: 80)
-                    .foregroundColor(Color.red) // Change the circle color as desired
+                    .foregroundColor(Color.red)
                 
                 Text(String(email.prefix(1)).uppercased())
                     .font(.system(size: 40, weight: .bold))
@@ -24,6 +24,7 @@ struct SettingsView: View {
             
             Spacer()
             
+            //Sign Out Button
             Button(action: {
                 let firebaseAuth = Auth.auth()
                 do {
